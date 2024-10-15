@@ -1,0 +1,2380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>T2VHE</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://kit.fontawesome.com/f8ddf9854a.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+  <meta charset="utf-8">
+  <!-- <meta name="description"
+        content="PhyGenBench: A Benchmark for Physics Generation">
+  <meta name="keywords" content="PhyGenBench, Physics Generation, Benchmark ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> T2VHE: <b>Phy</b>sics <b>Gen</b>eration <b>Bench</b>mark</title> -->
+
+  <!-- <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaTeX Formula Display</title> -->
+  <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+  <script src="MathJax-master\es5\tex-mml-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+  <script src="./data/results/data_setting.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+  <script src="./visualizer/data/data_public.js" defer></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/OpenGVLab/Multi-Modality-Arena">
+            <b>Lvlm-ehub</b> <p style="font-size:18px; display: inline; margin-left: 5px;">🔥</p>
+          </a>
+          <a class="navbar-item" href="https://github.com/OpenGVLab/MMT-Bench">
+            <b>MMT-Bench</b> <p style="font-size:18px; display: inline; margin-left: 5px;">🔥</p>
+          </a>
+          <a class="navbar-item" href="https://mmiu-bench.github.io/">
+            <b>MMIU-Bench</b>
+            <p style="font-size:18px; display: inline; margin-left: 5px;">🔥</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title is-bold">
+            <span class="MMIU" style="vertical-align: middle">T2VHE</span>
+            </h1>
+          <h2 class="subtitle is-3 publication-subtitle">
+            Rethinking Human Evaluation Protocol for Text-to-Video Models: Enhancing Reliability,Reproducibility,and Practicality
+          </h2>
+          <div class="is-size-5 publication-authors">
+            <!-- <span class="author-block">Xiang Yue*<sup style="color:#ed4b82;">†,1</sup>,</span> -->
+            <span class="author-block">
+              Tianle Zhang<sup style="color:#ed4b82;">1</sup><sup>,</sup><sup style="color:#6fbf73;">2</sup></a>
+              ,
+            </span>
+            <!-- <span class="author-block">Yuansheng Ni*<sup style="color:#ffac33;">2</sup>,</span> -->
+            <span class="author-block">
+              Langtian Ma<sup style="color:#ffac33;">3</sup>,</a>
+            </span>
+            <span class="author-block">
+              Yuchen Yan<sup style="color:#007bff;">4</sup>,</a>,
+            </span>
+            <!-- <span class="author-block">Kai Zhang*<sup style="color:#6fbf73;">3</sup>,</span> -->
+            <span class="author-block">Yuchen Zhang<sup style="color:#6fbf73;">2</sup>,</span>
+            <span class="author-block">Kai Wang<sup style="color:#6fbf73;">2</sup>,</span>
+            <span class="author-block">Yue Yang<sup style="color:#ed4b82;">1</sup>,</span>
+            <span class="author-block">Ziyao Guo<sup style="color:#ed4b82;">1</sup>,</span>
+            <span class="author-block">Wenqi Shao<sup style="color:#ed4b82;">1</sup>,</span>
+            <span class="author-block">Yang You<sup style="color:#6fbf73;">2</sup>,</span>
+            <span class="author-block">Yu Qiao<sup style="color:#ed4b82;">1</sup>,</span>
+            <span class="author-block">Ping Luo<sup style="color:#770f4c;">5</sup>,</span>
+            <!-- <span ed4b82 6fbf73 6fbf73 class="author-block">Kaipeng Zhang<sup style="color:#6fbf73;">1</sup>,</span> -->
+            
+            <span class="author-block">
+              Kaipeng Zhang<sup style="color:#ed4b82;">1</sup><sup>†</sup></span>
+          </div>
+          
+          <br>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup style="color:#ed4b82;">1</sup>Shanghai AI Laboratory,</span>
+            <span class="author-block"><sup style="color:#6fbf73;">2</sup>National University of Singapore</span></br>
+            <span class="author-block"><sup style="color:#ffac33;">3</sup>University of Wisconsin-Madison,</span>
+            <span class="author-block"><sup style="color:#007bff;">4</sup>University of California San Diego,</span>
+            <span class="author-block"><sup style="color:#770f4c;">5</sup>The University of Hong Kong</span>
+          </div>
+
+          <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">†Corresponding Author:</span>
+            <span class="author-block"><a href="mailto:zhangkaipeng@pjlab.org.cn">zhangkaipeng@pjlab.org.cn</a></span>
+          </div>
+          
+          <div class="content has-text-centered">
+            <b>Because the number of videos uploaded is large, the loading may be slow. If this happens, please be patient and wait for a  while. </b>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <!-- @PAN TODO: change links https://arxiv.org/abs/2406.08845 --> 
+                <a href="https://arxiv.org/abs/2406.08845"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>  
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/ztlmememe/T2VHE"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              
+              <!-- Leaderboard Link. -->
+              <!-- <span class="link-block">
+                <a href="#leaderboard"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon has-text-white">
+                    <i class="fa-solid fa-medal"></i>
+                      <p style="font-size:18px">🏆</p> -->
+                  <!-- </span>
+                  <span>Leaderboard</span>
+                </a>
+              </span> --> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+</style>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <!-- <div class="hero-body">
+      <img src="static/images/tease_scores.png" alt="Examples from the dataset"/>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div> -->
+      <!-- <div class="box m-5"> -->
+        
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Overview</h2></div>
+          <div class="content has-text-justified">
+          <img src="static/images/PIP.png" alt="PhyGenBench" width="100%"/>
+            <p>Overview of T2VHE. <b>T2VHE</b> comprises four key components: evaluation metrics, evaluation method,
+              evaluator, and dynamic evaluation module. To ensure a comprehensive assessment of the T2V
+              model, we meticulously devise a set of evaluation metrics, accompanied by precise definitions
+              and corresponding reference perspectives. For ease of annotation, we employ a comparison-based
+              scoring format as evaluation method and develop annotator training to ensure researchers can
+              procure high-quality annotations using post-training LRAs. Furthermore, our protocol incorporates
+              an optional dynamic evaluation component, enabling researchers to attain reliable evaluation results
+              at reduced costs.</p>
+          </p>
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh;">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">🔔News</h2>
+        <div class="content has-text-center">
+          <p>
+            <b>🔥We release the code and data at <a href="https://github.com/ztlmememe/T2VHE">github</a>.</b>
+          </p>
+      </div>      
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p>
+            Text-to-video (T2V) technology has made significant advancements in the last two years and garnered
+increasing attention from the general community. T2V products such as Gen2 and Pika
+have attracted many users. More recently, Sora, a powerful T2V model from OpenAI, further
+heightened public anticipation for the T2V technology. Predictably, the evaluation of the T2V
+generation will also become increasingly important, which can guide the development of T2V and
+assist the public in selecting appropriate models. This paper does a comprehensive paper
+survey and explores a human evaluation protocol for T2V generation.
+          </p>
+        </div>
+        <img src="static/images/EXAMPLE.png" alt="demo" class="example_style" >
+        <div>
+            Example of the annotation interface (left), wherein annotators choose the superior video based on provided evaluation metrics. 
+            Detailed explanation and reference perspectives of the “Video Quality" metric, as well as the corresponding examples and analysis process (right), 
+            annotators can make more accurate judgments by reading these guidelines and examples.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+</div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 MMIU">
+    <span class="MMIU" style="vertical-align: middle">T2VHE
+    </span>
+  </h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Evaluation metrics</h2>
+        <table border="1" cellspacing="0" cellpadding="4" style="width:100%; border-collapse: collapse;">
+          <thead>
+              <tr>
+                  <th style="width:15%;">Metric</th>
+                  <th style="width:22%;">Definition</th>
+                  <th style="width:18%;">Reference perspectives</th>
+                  <th style="width:30%;">Description</th>
+                  <th style="width:15%;">Type</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Video Quality</td>
+              <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Which video is more realistic and aesthetically pleasing?</td>
+              <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Video Fidelity</td>
+              <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Assess whether the video appears highly realistic, making it hard to distinguish from actual footage.</td>
+              <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Objective</td>
+          </tr>
+          <tr>
+              <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Aesthetic Appeal</td>
+              <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Evaluate the artistic beauty and aesthetic value of each video frame, including color coordination, composition, and lighting effects.</td>
+          </tr>
+          
+      
+              <tr>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px; ">Temporal Quality</td>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Which video has better consistency and less flickering over time?</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Content Consistency</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Evaluate whether the subject's and background's appearances remain unchanged throughout the video.</td>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Objective</td>
+              </tr>
+              <tr>
+          
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Temporal Flickering</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Assess the consistency of local and high-frequency details over time in the video.</td>
+     
+              </tr>
+      
+              <tr>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Motion Quality</td>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Which video contains motions that are more natural, smooth, and consistent with physical laws?</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Movement Fluidity</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Evaluate the natural fluidity and adherence to physical laws of movements within the video.</td>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Objective</td>
+              </tr>
+              <tr>
+                  
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Motion Intensity</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Assess whether the dynamic activities in the video are sufficient and appropriate.</td>
+                
+              </tr>
+      
+              <tr>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Text Alignment</td>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Which video has a higher degree of alignment with the prompt?</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Object Category</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Assess whether the video accurately reflects the types and quantities of objects described in the text.</td>
+                  <td rowspan="2" class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Objective</td>
+              </tr>
+              <tr>
+                
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">Style Consistency</td>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 13px;">Evaluate whether the visual style of the video matches the text description.</td>
+     
+              </tr>
+      
+              <tr style="background-color: #f0f0f0;">
+                  <td rowspan="3" style="text-align: center; vertical-align: middle; font-size: 15px;">Ethical Robustness</td>
+                  <td rowspan="3" style="text-align: center; vertical-align: middle; font-size: 13px;">Which video demonstrates higher ethical standards and fairness?</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 15px;">Toxicity</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 13px;">Evaluate the video for any content that might be deemed toxic or inappropriate.</td>
+                  <td rowspan="3" style="text-align: center; vertical-align: middle; font-size: 15px;">Subjectivity</td>
+              </tr>
+              <tr style="background-color: #f0f0f0;">
+                  
+                  <td style="text-align: center; vertical-align: middle; font-size: 15px;">Fairness</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 13px;">Determine the fairness in the portrayal and treatment of characters or subjects across different social dimensions.</td>
+                 
+              </tr>
+              <tr style="background-color: #f0f0f0;">
+         
+                  <td style="text-align: center; vertical-align: middle; font-size: 15px;">Bias</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 13px;">Assess the presence and handling of biased content within the video.</td>
+
+              </tr>
+      
+              <tr style="background-color: #f0f0f0;">
+                  <td rowspan="3" style="text-align: center; vertical-align: middle; font-size: 15px;">Human Preference</td>
+                  <td rowspan="3" style="text-align: center; vertical-align: middle; font-size: 13px;">As an annotator, which video do you prefer?</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 15px;">Video Originality</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 13px;">Evaluate the originality of the video's contents.</td>
+                  <td rowspan="3" style="text-align: center; vertical-align: middle; font-size: 15px;">Subjectivity</td>
+              </tr>
+              <tr style="background-color: #f0f0f0;">
+            
+                  <td style="text-align: center; vertical-align: middle; font-size: 15px;">Overall Impact</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 13px;">Assess the emotional and intellectual value provided by the video.</td>
+          
+              </tr>
+              <tr style="background-color: #f0f0f0;">
+        
+                  <td style="text-align: center; vertical-align: middle; font-size: 15px;">Personal Preference</td>
+                  <td style="text-align: center; vertical-align: middle; font-size: 13px;">Assess the video based on the previous five metrics and personal preferences.</td>
+        
+              </tr>
+          </tbody>
+      </table>
+      <div class="content has-text-justified">
+        <p>
+          Comprehensive evaluation metrics for T2V models. 
+          The table presents T2VHE's evaluation metrics, their definitions, 
+          corresponding reference perspectives, and types. 
+          When considering different indicators, annotators rely differently on 
+          reference angles in making their judgments.
+        </p>
+      </div>
+      
+      
+
+    </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Evaluation method</h2>
+
+        
+      <div class="content has-text-justified">
+        <p>
+          Regarding absolute scoring could still result in noisy annotations and pose challenges in reaching
+          consensus among annotator, we use the less challenging <b>comparative scoring method</b>.
+Furthermore, traditional comparative scoring protocols rely on the win ratio in pair-
+wise comparison, however, this method has several drawbacks, i.e., introducing bias if models are not uniformly compared, does not reliably indicate the likelihood of one model outperforming
+another. To overcome these issues, we adopt the <b>Rao and Kupper model</b>, a probabilistic
+approach that allows for more efficient handling of the results of pairwise comparisons using less data
+than full comparisons. The estimation is conducted by maximizing the log-likelihood function:
+
+
+\[
+    l(p, \theta) = \sum_{i = 1 }^{t} \sum_{j = i + 1}^t \left( n_{ij} \log \frac{p_i}{p_i + \theta p_j} 
+    + n_{ji} \log \frac{p_j}{\theta p_i + p_j} + \tilde{n}_{ij} \log 
+    \frac{p_i p_j (\theta^2 -1)}{(p_i + \theta p_j)(\theta p_i + p_j)} \right),
+    \]
+
+where $t$ is the number of models, $p = (p_1, \cdots, p_t)^T \in \mathbb{R}^t$ is the vector representing the scores of each model, $\theta$ is a tolerance parameter, $n_{ij}$ denote the number of times model $i$ is preferred to model $j$, and $\tilde{n_{ij}}$ denotes the number of times the two models reached a tie.
+
+</p>
+    </div>
+  </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Evaluators</h2>
+        <div class="content has-text-justified">
+
+          <p>
+
+            To ensure the quality of the annotations, for each metric, we design a set of annotator training, including their detailed definitions, 
+              corresponding reference perspectives, and for each reference perspective, 
+              we further provide the corresponding analysis process and examples to help the annotators to make decisions. 
+              At the same time, for different types of indicators, we have different notes to help annotators achieve a balance between objective criteria and subjective judgment.
+              Below are training examples of objective metric "Video Quality" and subjective metric "Human Preference".
+            </p>
+
+        </div>
+
+        
+        <div class="content has-text-justified">
+
+          <p>
+
+            <b>Example of training for "Video Quality"</b>
+            </p>
+
+        </div>
+
+    <div class=" custom-container"> <!-- 添加自定义容器类 -->
+      <div class="left-aligned"> <!-- 添加靠左对齐类 -->
+  
+          <span style="font-size:22px;"><b>Core Question: Which video is more realistic and aesthetically pleasing?</b></span><br><br> 
+  
+          <span style="color: red; font-weight: bold;">
+              <b>Note:</b> Please select "Equal" only when both videos perform identically across all reference angles, 
+              and if there are conflicting views on the reference perspectives, please prioritize them in order.<br>
+              For example, if the video on the left is more realistic and the video on the right is more aesthetically pleasing, 
+              the result should be "Left is Better".</span><br><br>
+  
+          <span style="font-size:22px;"><b>Reference perspectives:</b></span><br><br> 
+          P1. Video Fidelity -- Assess whether the video appears highly realistic, making it hard to distinguish from actual footage.<br><br> 
+          - Example prompt: bat eating fruits while hanging<br> 
+          <span style='display:block; margin-top:10px;margin-bottom:-10px;'>
+              - Analysis: In the left video, the bats and fruits merge together, and in some frames three wings appear, these scenes are almost unseen in reality. 
+              By contrast, the scenes in the right video are comparatively more reasonable.</span><br> 
+          <span style="color: red; font-weight: bold;">Conclusion: Right is better.</span><br><br> 
+          
+          <div class="video-container"> 
+              <video src="static\videos\dim1\1-1.mp4" controls></video>
+              <video src="static\videos\dim1\1-2.mp4" controls></video>
+          </div>
+          
+          P2. Aesthetic Appeal -- Evaluate the artistic beauty and aesthetic value of each video frame, including color coordination, composition, and lighting effects.<br><br> 
+          - Example prompt: an aerial footage of a red sky<br> 
+          <span style='display:block; margin-top:10px;margin-bottom:-10px;'>
+              - Analysis: The left video features richer content with a more diverse selection and combination of colors, and excellent lighting effects. 
+              In contrast, the right video is relatively more monotonous, and its color coordination is less appealing.</span><br> 
+          <span style="color: red; font-weight: bold;">Conclusion: Left is better.</span><br><br> 
+          
+          <div class="video-container"> 
+              <video src="static\videos\dim1\2-1.mp4" controls></video>
+              <video src="static\videos\dim1\2-2.mp4" controls></video>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="content has-text-justified">
+    <div style="height: 20px;"></div> <!-- 创建间距 -->
+    <p >
+
+      <b>Example of training for "Human Preference"</b>
+      </p>
+
+  </div>
+
+  <div class=" custom-container"> <!-- 添加自定义容器类 -->
+    <div class="left-aligned"> <!-- 添加靠左对齐类 -->
+
+      <span style="font-size:22px;"><b>Core Question: As an annotator, which video do you prefer?
+        If there are conflicting views on the reference perspectives, please prioritize them to your own liking. </b></span><br><br>
+    <span style="color: red; font-weight: bold;">
+     <b>Note:</b> Due to the subjective nature of this criterion, this guide only offers possible perspectives for reference.</span><br><br> 
+    <span style="font-size:22px;"><b>Reference perspectives:</b></span><br><br> 
+    
+    P1: Video Originality -- Evaluate the originality of the video's contents.<br><br> 
+    - Example 1: Whether the video has its own innovative features based on corresponding real items?<br> 
+    - Example 2: Can the video be distinguished from traditional videos in terms of style or narrative technique?<br><br>
+    
+    P2: Overall impact -- Assess the emotional and intellectual value provided by the video.<br><br> 
+    - Example 1: Does the video evoke a strong emotional response, such as joy, sadness, or excitement?<br> 
+    - Example 2: Does the video stimulate intellectual curiosity or provide thought-provoking content?<br><br>
+    
+    P3: Personal Preference -- Assess the video based on the previous five metrics and personal preferences.<br><br> 
+    - Example 1: Does the artistic style of the video appeal to your personal taste?<br> 
+    - Example 2: Do the themes or the moral messages of the video resonate with your personal values or experiences?
+    </div>
+</div>
+</div>
+</div>
+
+
+<div style="clear: both;"></div>
+
+
+
+
+<div class="columns is-centered has-text-centered">
+  <!-- <div class="column is-full-width has-text-centered"> -->
+  <div class="column is-four-fifths">
+    <h2 class="title is-3">Dynamic evaluation module</h2>
+
+    <div class="content has-text-justified">
+
+      <p>
+        Evaluating multiple video models via traditional pairwise evaluation protocols becomes increasingly 
+resource-intensive as the number of models expands. 
+To efficiently obtain stable model rankings, we propose a pluggable dynamic evaluation module, the specific process is as follows:
+
+<h3>Key Principles</h3>
+<ul>
+<li><strong>Video Quality Proximity Rule</strong>
+  <ul>
+      <li>Leverage the scoring results of automated metrics to allow human annotators to prioritize the annotation of samples that are difficult to distinguish with automated metrics.</li>
+      <li>Ensures that initially evaluated video pairs have similar quality levels.</li>
+  </ul>
+</li>
+<li><strong>Model strength Rule</strong>
+  <ul>
+      <li>Determines the evaluation priority of subsequent video pairs based on model strength scores.</li>
+      <li>Reducing the number of comparisons between models with significant differences in strength to improve algorithmic efficiency.</li>
+  </ul>
+</li>
+</ul>
+
+<h3>Evaluation Process</h3>
+
+<ol>
+<li><strong>Initial Model Strength Assignment</strong>
+  <ul>
+      <li>Each model is assigned an initial neutral strength value, indicating no prior bias.</li>
+  </ul>
+</li>
+
+<li><strong>Automatic Metrics Computation</strong>
+  <ul>
+      <li>For each video, the following metrics were evaluated by a pre-trained scorer: subject consistency, temporal flickering, motion smoothness, dynamic fegree, aesthetic quality, imaging quality, and overall consistency.</li>
+      <li>Scores are normalized and summed to produce the feature score for each video.</li>
+  </ul>
+</li>
+
+<li><strong>Group Construction</strong>
+  <ul>
+      <li>For each prompt, groups of model pairs are constructed.</li>
+      <li>The absolute value of the difference between the scores of two videos in a pair is input into an exponential decay model.</li>
+      <li>The output value is the score of each video pair, and the sum of these scores forms the total score for the group.</li>
+  </ul>
+</li>
+
+<li><strong>Sorting and Grouping</strong>
+  <ul>
+      <li>Groups were ranked according to their total scores, with higher scores at the top indicating less variation within the group.</li>
+      <li>This preprocessing step <strong>does not</strong> increase the cost of our evaluation protocol.</li>
+  </ul>
+</li>
+
+<li><strong>Human Evaluation Phase</strong>
+  <ul>
+      <li>An initial set of video pairs is evaluated by humans, and model strengths are updated using the Rao and Kupper model.</li>
+      <li>Comparisons are then split into batches. For each video pair, the absolute difference in scores between the two models is entered into an exponential decay model, whose output value is the probability that this pair will be discarded. After each batch, the model strength estimates were updated under the six evaluation dimensions.</li>
+      <li>The evaluation ends when the model rankings stabilize, meaning the rankings of models under each dimension remain unchanged for several consecutive batches.</li>
+  </ul>
+</li>
+</ol>
+</p>
+</div>
+
+
+
+
+</div>
+</div>
+
+
+          
+</section>
+<style>
+  .image-row {
+      display: center; /* Use flexbox layout */
+  }
+  .image-row img {
+      width: 40%; /* Each image takes up 50% of the width */
+  }
+</style>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 MMT-Bench">Experiment Results</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Evaluation results</h2>
+        
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <!-- <div class="column is-full-width has-text-centered"> -->
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3" id="leaderboard">Quantitative Evaluation</h2> -->
+        <div class="content">
+
+          <table border="1" cellspacing="0" cellpadding="4" style="width:100%; border-collapse: collapse;">
+
+            <thead>
+                <tr>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Model</th>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Video<br>Quality</th>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Temporal<br>Quality</th>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Motion<br>Quality</th>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Text<br>Alignment</th>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Ethical<br>Robustness</th>
+                    <th style="background-color: #0d0e0d;
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    font-size: 16px;">Human<br>Preference</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;" colspan="7"><b>Pre-training LRAs</b></td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Gen2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">3.33 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.63 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.03 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.57 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.36 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.87 (1)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Pika</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.11 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.71 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.37 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.03 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.08 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.21 (2)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Latte</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.67 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.79 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.84 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.03 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.00 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.77 (5)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>TF-T2V</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.76 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.09 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.01 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.90 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.06 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.87 (4)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Videocrafter2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.72 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.92 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.06 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.24 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.12 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.91 (3)</td>
+                </tr>
+                <tr>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;" colspan="7"><b>Post-training LRAs</b></td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Gen2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.71 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.37 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.16 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.71 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.57 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.96 (1)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Pika</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.16 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.34 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.24 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.12 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.18 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.24 (2)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Latte</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.82 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.89 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.89 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.43 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.42 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.89 (3)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>TF-T2V</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.91 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.00 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.95 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.82 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.86 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.85 (4)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Videocrafter2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.82 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.83 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.89 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.68 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.73 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.76 (5)</td>
+                </tr>
+                <tr>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;" colspan="7"><b>AMT Annotators</b></td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Gen2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.25 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.29 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.11 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.76 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">3.14 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.73 (1)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Pika</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.09 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.21 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.23 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.00 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.82 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.04 (2)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Latte</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.80 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.88 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.89 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.40 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.29 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.87 (3)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>TF-T2V</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.90 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.88 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.91 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.71 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.49 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.71 (4)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Videocrafter2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.86 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.76 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.87 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.51 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.29 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.56 (5)</td>
+                </tr>
+                <tr>
+                  <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;" colspan="7"><b>Post-training LRAs (Dyn)</b></td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Gen2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.75 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.42 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.30 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.90 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.66 (1)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">2.98 (1)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Pika</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.22 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.46 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.35 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.21 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.23 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.31 (2)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Latte</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.86 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.97 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.92 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.62 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.53 (2)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.98 (3)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>TF-T2V</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.92 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.01 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">1.00 (3)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.86 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.91 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.89 (4)</td>
+                </tr>
+                <tr>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;"><strong>Videocrafter2</strong></td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.87 (4)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.86 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.88 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.69 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.76 (5)</td>
+                    <td class="hover-row" style="text-align: center; vertical-align: middle; font-size: 15px;">0.81 (5)</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <!-- <div class="column is-full-width has-text-centered"> -->
+        <div class="column is-four-fifths">
+          <!-- <h2 class="title is-3">Comparison Results</h2> -->
+          <div class="content has-text-justified">
+      
+            <p>
+              Scores and rankings of models across various dimensions for pre-training LRAs, AMT
+  Annotators, and Post-training LRAs. Post-training LRAs (Dyn) refers to the annotation results of
+  Post-training LRAs using the dynamic evaluation component.
+            </p>
+            <img src="static\images\main_result.png"  alt="comparison" class="center" style="width: 200%; height: auto;">
+            
+            <div class="content has-text-justified">
+              <p>
+
+              We evaluated five state-of-the-art T2V model, as illustrated in the Table above and the Figure below, regardless of the annotator sources, closed-source models typically perform better.
+              
+            
+              <p>Furthermore, we identify the following key observations: </p>
+              <p><b>1): The annotation results obtained by the 
+                pre-training LRAs markedly differ from those of the other three groups, evident in the discrepancy between the final model 
+                scores and rankings for each dimension. </b>In addition, the annotation results of the trained LRAs closely mirror those of the AMT personnel, 
+                yielding consistent final model ranking outcomes. We also conduct a quality check of the annotation results for the LRAs before and after training.
+              </p> 
+              <p><b>2): In the annotated results from AMT personnel, Gen2 demonstrates significant superiority over other models across all metrics, 
+                while Pika also exhibits commendable performance across most metrics.</b> In contrast, The performances of open-source models show 
+                less disparity in terms of video quality, temporal quality, and motion quality metrics. 
+                TF-T2V's generations typically excel in video quality and action timing, while Videocrafter2, an earlier open-source model, demonstrates notable proficiency in generating high-quality videos.
+                However, distinctions among the three models become more apparent in the metrics of text alignment, ethical robustness, and human preference. 
+                Notably, Latte exhibits strong performance in text alignment and ethical robustness, even surpassing Pika.  </p>
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+        </div>
+        
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <!-- <div class="column is-full-width has-text-centered"> -->
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Module validation</h2>
+          
+
+          <div class="content has-text-justified">
+      
+            <p>
+              Our protocol, augmented by the dynamic evaluation module, cuts annotation costs to about <b>53% </b> of the original expense while achieving comparable outcomes. 
+              Subsequent experiments further confirmed the module's effectiveness and reliability.
+            </p>
+
+            <img src="static\images\val.png"  alt="comparison" class="center" style="width: 200%; height: auto;">
+            
+            <div class="content has-text-justified">
+              <p>
+
+                <p><b>1): The dynamic component allows the annotations needed for the evaluation to grow nearly linearly as the number of models increases.
+                  </b>
+                  <!-- Specifically, we randomly select corresponding annotation results from 2-4 models (25 model combinations in total) 
+                  out of all annotations. For each combination, we simulate the dynamic annotation process, calculating average annotation demands 
+                  and employing an exponential model to forecast annotation needs with escalating model numbers.  -->
+                  As shown in the Figure above left, our protocol with dynamic component demonstrates a nearly linear growth in annotation demands as the number of models increases, greatly reducing the evaluation costs.
+                </p> 
+                <p><b>2): Dynamic evaluation algorithms guarantee that the most valuable samples are annotated.</b> 
+                Before the start of the dynamic evaluation, 
+                annotators are required to annotate 200 video pairs where distinguishing differences between them based on automated metrics is 
+                challenging. This step ensures that the samples most deserving of human assessment will not be discarded in the dynamic 
+                assessment and that the initially estimated model scores are not biased by specific prompt types.
+              </p>
+              <p><b>3): The bootstrap confidence intervals for score estimation further proves the validity of annotation results.</b> 
+                As shown in the Figure above right, the confidence intervals for Latte, Pika, TF-T2V, and Videocrafter2 are consistently narrow, 
+                signifying precise estimations. 
+                At the same time, the confidence intervals for Gen2's scores are relatively wide, as our dynamic algorithm's frequent exclusion of
+                comparisons involving Gen2 due to its significant superiority over the other models. Nevertheless, even at the lower bound of the confidence intervals,
+                Gen2's score estimation remains superior to those of all other models. 
+                This highlights that the rank
+                estimations remain robust despite some instability in score estimation.
+              </p>
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+  </section>
+
+
+
+
+
+ <!-- <section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 MMT-Bench">Further Discussions</h1>
+  </div>
+</section>
+<section class="section">
+<div class="container is-max-desktop content">
+<div class="content has-text-justified">
+<p>To explore potential solutions for the challenges posed by PhyGenBench, We focus on widely used
+and proven-effective methods such as scaling laws, prompt engineering , and some method like Venhancer aimed to improve general video quality. And we determine whether they can resolve the inability of current T2V
+models to generate videos aligned with physical commonsense. Through quantitative and qualitative
+analysis, we find:</p>
+<p> <b>1) Scaling up models can solve some issues but still fails to handle dynamic
+physical phenomenons, which we believe requires extensive training on synthetic data.</b> </p>
+<p><b>2) Prompt engineering only solves a few simple issues (e.g., flame color), highlighting the difficulty and significance of PhyGenBench.</b></p> 
+<p><b>3) While some methods improve general video quality,they do not enhance the model's understanding of physical commonsense.</b></p>
+</div>
+
+</div>
+</section> -->
+
+
+<footer class="footer">
+  <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is website adapted from <a href="https://github.com/OpenGVLab/MMT-Bench">MMT-Bench</a>, <a href="https://mmmu-benchmark.github.io/">MMMU</a>, <a href="https://mathvista.github.io/">MathVista</a> and <a href="https://nerfies.github.io/">Nerfies</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+
+</footer>
+<script>
+   bulmaCarousel.attach('#results-carousel', {
+      slidesToScroll: 3,
+      slidesToShow: 3,  // 设置同时展示的元素数量为3
+      infinite: true,
+      autoplay: false,
+    });
+    bulmaCarousel.attach('#results1-carousel', {
+        slidesToScroll: 5,
+        slidesToShow: 5,  // 设置同时展示的元素数量为3
+        infinite: true,
+        autoplay: false,
+      });
+    
+  function changeButtonText() {
+    var button = document.getElementById('toggleButton');
+    if (button.innerHTML.includes("Validation Set Leaderboard")) {
+      button.innerHTML = "<b style='font-size: 15pxr;'>Test Set Leaderboard</b> (Click to Switch)";
+    } else {
+      button.innerHTML = "<b style='font-size: 15pxr;'>Validation Set Leaderboard</b> (Click to Switch)";
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var tables = document.querySelectorAll('table');
+
+    tables.forEach(function(table) {
+        if (!table) return;
+
+        var initialRows = Array.from(table.rows).slice(1);
+        table.addEventListener('click', function(event) {
+            var clickedCell = event.target.closest('td, th');
+            if (!clickedCell) return;
+            var headerRow = clickedCell.parentNode;
+            var columnIndex = Array.from(headerRow.cells).indexOf(clickedCell);
+            var type = clickedCell.getAttribute('data-type');
+
+            if (headerRow.rowIndex === 0) {
+                if (columnIndex === 0) {
+                    table.tBodies[0].innerHTML = '';
+                    initialRows.forEach(row => table.tBodies[0].appendChild(row.cloneNode(true)));
+                }
+            }
+        });
+    });
+});
+
+function sortTable(table, column, type, asc) {
+    var tbody = table.tBodies[0];
+    var rows = Array.from(tbody.rows);
+
+    rows.sort(function(a, b) {
+        var valA = a.cells[column].textContent;
+        var valB = b.cells[column].textContent;
+
+        if (type === 'number') {
+            valA = parseFloat(valA);
+            valB = parseFloat(valB);
+        }
+
+        return asc ? valA - valB : valB - valA;
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+}
+
+  // 切换表格的函数
+  function toggleTables () {
+      var table1 = document.getElementById('table1');
+      var table2 = document.getElementById('table2');
+      table1.classList.toggle('hidden');
+      table2.classList.toggle('hidden');
+  }
+
+  document.getElementById('toggleButton').addEventListener('click', toggleTables);
+  const canvas = document.getElementById('difficulty_level_chart');
+  canvas.style.width = '500px';
+  canvas.style.height = '120px';
+  const ctx = document.getElementById('difficulty_level_chart').getContext('2d');
+  const difficulty_level_chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Easy', 'Medium', 'Hard', 'Overall'],
+      datasets: [{
+        label: 'Fuyu-8B',
+        data: [28.9, 27, 26.4, 27.4],
+        backgroundColor: 'rgba(196, 123, 160, 0.6)',
+        borderColor: 'rgba(196, 123, 160, 1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(196, 123, 160, 1)'
+      },
+      {
+        label: 'Qwen-VL-7B',
+        data: [39.4, 31.9, 27.6, 32.9],
+        backgroundColor: 'rgba(245, 123, 113, 0.6)',
+        borderColor: 'rgba(245, 123, 113, 1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(245, 123, 113, 1)'
+      },
+      {
+        label: 'LLaVA-1.5-13B',
+        data: [41.3, 32.7, 26.7, 33.6],
+        backgroundColor: 'rgba(255, 208, 80, 0.6)',
+        borderColor: 'rgba(255, 208, 80, 1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(255, 208, 80, 1)'
+      },
+      {
+        label: 'InstructBLIP-T5-XXL',
+        data: [40.3, 32.3, 29.4, 33.8],
+        backgroundColor: 'rgba(110, 194, 134, 0.6)',
+        borderColor: 'rgba(110, 194, 134, 1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(110, 194, 134, 1)'
+      },
+      {
+        label: 'BLIP-2 FLAN-T5-XXL',
+        data: [41, 32.7, 28.5, 34],
+        backgroundColor: 'rgba(255, 153, 78, 0.6)',
+        borderColor: 'rgba(255, 153, 78, 1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(255, 153, 78, 1)'
+      },
+      {
+        label: 'GPT-4V',
+        data: [76.1, 55.6, 31.2, 55.7],
+        backgroundColor: 'rgba(117, 209, 215, 0.6)',
+        borderColor: 'rgba(117, 209, 215, 1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(117, 209, 215, 1)'
+      }]
+    },
+    options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        min: 0,
+        max: 100,
+        ticks: {
+          stepSize: 20,
+          font: {
+            size: 16
+          }
+        }
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 16 // 设置X轴字体大小
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            size: 16 // 设置标签文字大小
+          }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return context.dataset.label + ': ' + context.parsed.y;
+          }
+        }
+      }
+    },
+      onHover: (event, chartElement) => {
+        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+      }
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    // Data for the "Diagrams" chart
+    const data_Diagrams = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [27.6, 30.1, 31.8, 30.0, 32.0, 46.8],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+
+    // "data_Diagrams" chart
+    new Chart(document.getElementById('chart_Diagrams'), {
+        type: 'bar',
+        data: data_Diagrams,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Tables" chart
+    const data_Tables  = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [26.6, 29.0, 29.8, 27.8, 27.8, 61.8],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Tables'), {
+        type: 'bar',
+        data: data_Tables,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_PlotsAndCharts " chart
+    const data_PlotsAndCharts   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [24.8, 31.8, 36.2, 30.4, 35.8, 55.6],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_PlotsAndCharts'), {
+        type: 'bar',
+        data: data_PlotsAndCharts ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_ChemicalStructures " chart
+    const data_ChemicalStructures   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [25.0, 27.2, 27.1, 26.7, 25.5, 50.6],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_ChemicalStructures'), {
+        type: 'bar',
+        data: data_ChemicalStructures ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Photographs " chart
+    const data_Photographs   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [27.6, 40.5, 41.4, 44.4, 42.0, 64.2],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Photographs'), {
+        type: 'bar',
+        data: data_Photographs ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Paintings " chart
+    const data_Paintings   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [28.7, 57.2, 53.6, 56.3, 52.1, 75.9],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Paintings'), {
+        type: 'bar',
+        data: data_Paintings ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_GeometricShapes " chart
+    const data_GeometricShapes   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [21.1, 25.3, 21.4, 25.6, 28.3, 40.2],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_GeometricShapes'), {
+        type: 'bar',
+        data: data_GeometricShapes ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_SheetMusic " chart
+    const data_SheetMusic   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [35.2, 33.4, 34.6, 35.8, 34.9, 38.8],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_SheetMusic'), {
+        type: 'bar',
+        data: data_SheetMusic ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_MedicalImages " chart
+    const data_MedicalImages   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [25.4, 29.8, 31.6, 36.4, 29.8, 59.6],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_MedicalImages'), {
+        type: 'bar',
+        data: data_MedicalImages ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_PathologicalImages " chart
+    const data_PathologicalImages   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [26.5, 27.7, 31.2, 35.2, 35.6, 63.6],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_PathologicalImages'), {
+        type: 'bar',
+        data: data_PathologicalImages ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_MicroscopicImages " chart
+    const data_MicroscopicImages   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [27.0, 37.6, 29.2, 36.3, 32.7, 58.0],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_MicroscopicImages'), {
+        type: 'bar',
+        data: data_MicroscopicImages ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_MRIsCTScansXrays " chart
+    const data_MRIsCTScansXrays   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [21.7, 36.9, 33.3, 39.4, 29.8, 50.0],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_MRIsCTScansXrays'), {
+        type: 'bar',
+        data: data_MRIsCTScansXrays ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_SketchesAndDrafts " chart
+    const data_SketchesAndDrafts   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [37.0, 32.1, 29.9, 38.0, 33.7, 55.4],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_SketchesAndDrafts'), {
+        type: 'bar',
+        data: data_SketchesAndDrafts ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Maps " chart
+    const data_Maps   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [38.2, 36.5, 45.9, 47.6, 43.5, 61.8],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Maps'), {
+        type: 'bar',
+        data: data_Maps ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_TechnicalBlueprints " chart
+    const data_TechnicalBlueprints   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [24.7, 25.9, 28.4, 25.3, 27.8, 38.9],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_TechnicalBlueprints'), {
+        type: 'bar',
+        data: data_TechnicalBlueprints ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_TreesAndGraphs " chart
+    const data_TreesAndGraphs   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [30.1, 28.1, 28.8, 28.8, 34.9, 50.0],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_TreesAndGraphs'), {
+        type: 'bar',
+        data: data_TreesAndGraphs ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_MathematicalNotations " chart
+    const data_MathematicalNotations   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [15.8, 27.1, 22.6, 21.8, 21.1, 45.9],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_MathematicalNotations'), {
+        type: 'bar',
+        data: data_MathematicalNotations ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_ComicsAndCartoons " chart
+    const data_ComicsAndCartoons   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [29.0, 51.9, 49.6, 54.2, 51.1, 68.7],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_ComicsAndCartoons'), {
+        type: 'bar',
+        data: data_ComicsAndCartoons ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Sculpture " chart
+    const data_Sculpture   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [30.8, 46.2, 49.6, 51.3, 53.0, 76.1],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Sculpture'), {
+        type: 'bar',
+        data: data_Sculpture ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Portraits " chart
+    const data_Portraits   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [20.9, 52.7, 46.2, 54.9, 47.3, 70.3],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Portraits'), {
+        type: 'bar',
+        data: data_Portraits ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Screenshots " chart
+    const data_Screenshots   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [38.6, 35.7, 38.6, 34.3, 47.1, 65.7],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Screenshots'), {
+        type: 'bar',
+        data: data_Screenshots ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Other " chart
+    const data_Other   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [28.3, 38.3, 50.0, 51.7, 58.3, 68.3],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Other'), {
+        type: 'bar',
+        data: data_Other ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Poster " chart
+    const data_Poster   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [38.6, 50.9, 52.6, 61.4, 64.9, 80.7],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Poster'), {
+        type: 'bar',
+        data: data_Poster ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_IconsAndSymbols " chart
+    const data_IconsAndSymbols   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [23.8, 66.7, 57.1, 59.5, 59.5, 78.6],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_IconsAndSymbols'), {
+        type: 'bar',
+        data: data_IconsAndSymbols ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_HistoricalTimelines " chart
+    const data_HistoricalTimelines   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [30.0, 36.7, 40.0, 43.3, 43.3, 63.3],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_HistoricalTimelines'), {
+        type: 'bar',
+        data: data_HistoricalTimelines ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_3DRenderings " chart
+    const data_3DRenderings   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [33.3, 28.6, 57.1, 38.1, 47.6, 47.6],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_3DRenderings'), {
+        type: 'bar',
+        data: data_3DRenderings ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_DNASequences " chart
+    const data_DNASequences   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [20.0, 45.0, 25.0, 25.0, 45.0, 55.0],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_DNASequences'), {
+        type: 'bar',
+        data: data_DNASequences ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Landscapes " chart
+    const data_Landscapes   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [43.8, 43.8, 50.0, 31.2, 62.5, 68.8],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Landscapes'), {
+        type: 'bar',
+        data: data_Landscapes ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_LogosAndBranding " chart
+    const data_LogosAndBranding   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [21.4, 57.1, 64.3, 35.7, 50.0, 85.7],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_LogosAndBranding'), {
+        type: 'bar',
+        data: data_LogosAndBranding ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 20
+            }
+          },
+          x: {
+            display: false
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+
+    // "data_Advertisements " chart
+    const data_Advertisements   = {
+        labels: ['Fuyu-8B', 'Qwen-VL-7B', 'InstructBLIP-T5-XXL', 'LLaVA-1.5-13B', 'BLIP-2 FLAN-T5-XXL', 'GPT-4V'],
+        datasets: [{
+            data: [30.0, 60.0, 50.0, 60.0, 70.0, 100.0],
+            backgroundColor: ['rgba(196, 123, 160, 0.6)', 'rgba(245, 123, 113, 0.6)', 'rgba(255, 208, 80, 0.6)', 'rgba(110, 194, 134, 0.6)', 'rgba(255, 153, 78, 0.6)', 'rgba(117, 209, 215, 0.6)'],
+            borderColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,0.4)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)'],
+            hoverBackgroundColor: ['rgba(196, 123, 160, 1)', 'rgba(245, 123, 113,1)', 'rgba(255, 208, 80, 1)', 'rgba(110, 194, 134, 1)', 'rgba(255, 153, 78, 1)', 'rgba(117, 209, 215, 1)']
+        }]
+    };
+    new Chart(document.getElementById('chart_Advertisements'), {
+        type: 'bar',
+        data: data_Advertisements ,
+        options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            min: 0,     
+            max: 100,   
+            ticks: {
+              stepSize: 20 
+            }
+          },
+          x: {
+            display: false 
+          }
+        },
+        plugins: {
+          legend: {
+            display: false 
+          },
+          tooltip: {
+          }
+        }
+      }
+    });
+});
+
+</script>
+
+<style>
+  .custom-background {
+  background-color:#FFF2CC; /* 你想要的背景颜色 */
+}
+
+.custom-font {
+  font-family: 'Comic Sans MS', cursive, 'Trebuchet MS', sans-serif; /* 你想要的字体 */
+  font-size: 16px; /* 字体大小 */
+  font-weight: bold; /* 字体粗细 */
+}
+  .hidden {
+      display: none;
+  }
+  .sortable:hover {
+      cursor: pointer;
+  }
+  .asc::after {
+      content: ' ↑';
+  }
+  .desc::after {
+      content: ' ↓';
+  }
+  #toggleButton {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #555555;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition-duration: 0.4s;
+  }
+
+  #toggleButton:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); /* 鼠标悬停时的阴影效果 */
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+  }
+
+  th, td {
+      text-align: left;
+      padding: 8px;
+  }
+
+  th {
+      background-color: #f2f2f2;
+      border-bottom: 2px solid #ddd;
+  }
+
+  td:hover {background-color: #ffffff;}
+</style>
+</body>
+</html>
