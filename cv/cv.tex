@@ -1,90 +1,68 @@
 % =============================================================================
 % Tianle Zhang — Curriculum Vitae
-% Compile with XeLaTeX (auto-built by GitHub Actions; see .github/workflows/)
+% Compile with XeLaTeX. Auto-built by GitHub Actions (.github/workflows/build-cv.yml).
 % =============================================================================
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{article}
+
+% ---------- geometry ----------
+\usepackage[a4paper,top=1.4cm,bottom=1.4cm,left=1.6cm,right=1.6cm]{geometry}
+
+% ---------- fonts (sans-serif body, close to Calibri feel) ----------
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Heros}            % Helvetica-like sans
+\newfontfamily\cjkfont{Droid Sans Fallback}  % fallback for "张天乐" locally; GA will use Noto
+\linespread{1.05}
 
 % ---------- packages ----------
-\usepackage[a4paper,margin=2cm,top=1.8cm,bottom=1.8cm]{geometry}
-\usepackage{fontspec}
-\usepackage{xeCJK}
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{xcolor}
-\usepackage{parskip}
 \usepackage[hidelinks]{hyperref}
 
-% ---------- fonts ----------
-% Body: Latin Modern (TeX default, available everywhere)
-% Chinese: Noto Serif CJK SC (ships with TeX Live full)
-\setCJKmainfont[Scale=0.95]{Noto Serif CJK SC}
-
-% ---------- colours ----------
+% ---------- colours / links ----------
 \definecolor{accent}{HTML}{2C5282}
 \hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
 
-% ---------- section style ----------
-% All-caps small caps, with full-width rule
+% ---------- section style: small caps + thin rule, tight ----------
 \titleformat{\section}
-  {\normalfont\large\bfseries\scshape}{}{0em}{}[\vspace{-6pt}\noindent\rule{\linewidth}{0.4pt}]
-\titlespacing*{\section}{0pt}{14pt}{4pt}
+  {\normalfont\large\bfseries\scshape}{}{0em}{}[\vspace{-4pt}\noindent\textcolor{black!40}{\rule{\linewidth}{0.4pt}}]
+\titlespacing*{\section}{0pt}{8pt}{2pt}
 
 % ---------- helpers ----------
-\newcommand{\me}[1]{\textbf{#1}}                 % self in author lists
-\newcommand{\eq}{\textsuperscript{\textbf{*}}}   % equal contribution
-\newcommand{\corr}{\textsuperscript{\textbf{\dag}}} % corresponding author
+\newcommand{\me}[1]{\textbf{#1}}
+\newcommand{\eq}{\textsuperscript{\textbf{*}}}
+\newcommand{\corr}{\textsuperscript{\textbf{\dag}}}
 
-% Two-column entry helpers ----------
-% Institution row: bold + suffix, dates right
-\newcommand{\entryhead}[3]{%
-  \noindent\textbf{#1}#2\hfill #3\par
-}
-% Sub-row: italic role + advisor, location/date right
-\newcommand{\entrysub}[2]{%
-  \noindent\textit{#1}\hfill #2\par
-}
+% Two-column row: bold left + grey-ish right, on one line
+\newcommand{\row}[2]{\noindent\textbf{#1}\hfill #2\par}
+\newcommand{\subrow}[2]{\noindent\textit{#1}\hfill #2\par}
 
-% Publication entry ----------
-% args: {venue tag}{title}{authors}{venue line}
-\newcommand{\publication}[4]{%
-  \begin{itemize}[leftmargin=1.4em,topsep=2pt,itemsep=0pt,partopsep=0pt]
-  \item \textbf{(#1)}~#2.\\
-    #3\\
-    \textit{In: #4}
-  \end{itemize}%
-}
+% ---------- list defaults: tight ----------
+\setlist[itemize]{leftmargin=1.2em, topsep=1pt, itemsep=1pt, partopsep=0pt, parsep=0pt, label=\textbullet}
+\setlist[enumerate]{leftmargin=1.5em, topsep=2pt, itemsep=3pt, partopsep=0pt, parsep=0pt}
 
-% Bulleted lists default
-\setlist[itemize]{leftmargin=1.4em, topsep=2pt, itemsep=1pt, partopsep=0pt, parsep=0pt}
-
-\pagestyle{empty}
 \setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\pagestyle{empty}
 
 % =============================================================================
 \begin{document}
 
 % ---------- HEADER ----------
-{\Huge\bfseries Tianle Zhang\quad{\normalsize\mdseries (张天乐)}}
-
-\vspace{4pt}
-Ph.D.\ Student, College of Computing and Data Science, Nanyang Technological University, Singapore
-
+{\Huge\bfseries Tianle Zhang \,\,{\normalsize\mdseries\,({\cjkfont 张天乐})}}\par
 \vspace{2pt}
-\href{mailto:tianle006@e.ntu.edu.sg}{tianle006@e.ntu.edu.sg} \,---\, +65 8491 7566 \,---\,
-\href{https://ztlmememe.github.io/}{Homepage} \,---\,
-\href{https://scholar.google.com.hk/citations?user=Qbd4ybsAAAAJ&hl=en}{Google Scholar} \,---\, Male
-
+Ph.D.\ Student, College of Computing and Data Science, Nanyang Technological University, Singapore\par
+\vspace{1pt}
+\href{mailto:tianle006@e.ntu.edu.sg}{tianle006@e.ntu.edu.sg} \,|\, +65 8491 7566 \,|\,
+\href{https://ztlmememe.github.io/}{Homepage} \,|\,
+\href{https://scholar.google.com.hk/citations?user=Qbd4ybsAAAAJ&hl=en}{Google Scholar} \,|\, Male\par
 \vspace{2pt}
-\textbf{Research interests:}\;
-1, \#Multi-modal LLMs \quad
-2, \#AI4S \quad
-3, \#Efficient Deep Learning \quad
-4, \#Evaluation of Generative Models \quad
-5, \#Dataset Distillation
+{\small\textbf{Research interests:}\;
+\#Multi-modal LLMs \,$\cdot$\, \#AI4S \,$\cdot$\, \#Efficient Deep Learning \,$\cdot$\, \#Evaluation of Generative Models \,$\cdot$\, \#Dataset Distillation}
 
 % ---------- PROFILE ----------
 \section*{Profile}
-
+{\small
 My research focuses on combining large language models (LLMs) with domain foundation models (FMs) ---
 making the integration both efficient and effective --- with growing emphasis on scientific domains
 such as small molecules and proteins. On the modeling side, I proposed a training-free framework
@@ -92,149 +70,122 @@ that enables LLMs to reason over non-text modalities via in-context representati
 the molecular domain as the testbed (NeurIPS 2025, first author; Prof.\ Alvin Chan as corresponding
 author), and contributed to subsequent work on strategic multimodal representation alignment
 (AAAI 2026). On the evaluation side, I re-designed the human-evaluation protocol for text-to-video
-generation to improve reliability and reproducibility (NeurIPS 2024, first author), and contributed
-to ConvBench, a hierarchical multi-turn benchmark for large vision-language models
-(NeurIPS 2024 Spotlight). Earlier work on efficient learning includes expanding-window trajectory
-matching for lossless graph dataset condensation (ICML 2024, co-first author). Across 8 publications
-at top-tier ML venues (NeurIPS, ICML, AAAI) and IEEE conferences, I am first or co-first author on
-5. I am supported by the NTU Research Scholarship, and serve as a reviewer for ICLR 2026,
-NeurIPS 2025/2026, and ICML 2025/2026. Further details on my
-\href{https://ztlmememe.github.io/}{homepage}.
+generation (NeurIPS 2024, first author), and contributed to ConvBench, a hierarchical multi-turn
+benchmark for large vision-language models (NeurIPS 2024 Spotlight). Earlier work on efficient
+learning includes expanding-window trajectory matching for lossless graph dataset condensation
+(ICML 2024, co-first author). Across 8 publications at top-tier ML venues (NeurIPS, ICML, AAAI) and
+IEEE conferences, I am first or co-first author on 5. I am supported by the NTU Research
+Scholarship, and serve as a reviewer for ICLR 2026, NeurIPS 2025/2026, and ICML 2025/2026.
+Further details on my \href{https://ztlmememe.github.io/}{homepage}.
+}
 
 % ---------- EDUCATION ----------
 \section*{Education}
 
-\entryhead{Nanyang Technological University}{, College of Computing and Data Science, Singapore}{Jan.~2025 -- Present}
-Ph.D.\ in Computer Science;\, Current GPA: 5.0/5.0\\
-Advisor: \textit{Prof.\ Alvin Chan Guo Wei} (College of Computing and Data Science, NTU)\\
-Funded by \textit{NTU Research Scholarship} (full tuition + stipend; awarded Sep.\ 2024).
+\row{Nanyang Technological University, College of Computing and Data Science}{Singapore \,|\, Jan.~2025 -- Present}
+Ph.D.\ in Computer Science;\, GPA: 5.0/5.0. \,
+Advisor: \textit{Prof.\ Alvin Chan Guo Wei}. \,
+Funded by \textit{NTU Research Scholarship} (full tuition + stipend, Sep.~2024).
 
-\vspace{6pt}
-\entryhead{University of Electronic Science and Technology of China}{, Chengdu, China}{Sep.~2020 -- Jun.~2024}
-B.Eng.\ in Computer Science and Technology (Joint Degree Program in Smart Finance \& Blockchain Finance)\\
-GPA: 88.51/100\\
-\textit{Selected coursework:} Machine Learning (97), Data Structures \& Algorithms (95), Smart Contract \& DApps Development (95), Mathematical Modeling (96), Data Mining \& Big Data Analytics (92), Probability \& Statistics (92), Database Theory (91), Software Engineering (91), Computer Organization (90).
+\vspace{4pt}
+\row{University of Electronic Science and Technology of China}{Chengdu, China \,|\, Sep.~2020 -- Jun.~2024}
+B.Eng.\ in Computer Science and Technology (Joint Degree in Smart Finance \& Blockchain Finance); GPA: 88.51/100.\par
+{\small\textit{Selected coursework:} Machine Learning (97), Data Structures \& Algorithms (95), Smart Contract \& DApps (95), Mathematical Modeling (96), Data Mining \& Big Data (92), Probability \& Statistics (92), Database Theory (91), Software Engineering (91).}
 
 % ---------- ACADEMIC EXPERIENCE ----------
 \section*{Academic Experience}
 
-\entryhead{Nanyang Technological University}{, College of Computing and Data Science}{Singapore}
-\entrysub{Ph.D.\ Student.\, Advisor: Prof.\ Alvin Chan Guo Wei}{Jan.~2025 -- Present}
+\row{Nanyang Technological University, CCDS}{Singapore}
+\subrow{Ph.D.\ Student.\, Advisor: Prof.\ Alvin Chan Guo Wei}{Jan.~2025 -- Present}
 \begin{itemize}
-  \item Exploring new ways to combine large language models (LLMs) with domain foundation models (FMs),
-        aiming for integrations that are both more efficient and more effective. Current focus is on
-        scientific domains --- small molecules and proteins --- where structured FM representations
-        can complement LLM reasoning.
+  \item Exploring new ways to combine LLMs with domain foundation models (FMs), aiming for integrations that are both more efficient and more effective. Current focus: scientific domains --- small molecules and proteins --- where structured FM representations complement LLM reasoning.
 \end{itemize}
 
-\entryhead{Nanyang Technological University}{, College of Computing and Data Science}{Singapore}
-\entrysub{Research Assistant.\, Advisor: Prof.\ Alvin Chan Guo Wei}{Oct.~2024 -- Jan.~2025}
+\row{Nanyang Technological University, CCDS}{Singapore}
+\subrow{Research Assistant.\, Advisor: Prof.\ Alvin Chan Guo Wei}{Oct.~2024 -- Jan.~2025}
 \begin{itemize}
-  \item Investigated whether large language models can reason over non-text modalities without
-        additional training, by treating modality tokens as in-context representations rather than
-        fine-tuning targets. The proposed In-Context Representation Learning (ICRL) framework,
-        evaluated on the molecular domain, is to our knowledge the first training-free framework
-        of its kind. Published at NeurIPS 2025 (first author).
+  \item Investigated whether LLMs can reason over non-text modalities without additional training, by treating modality tokens as in-context representations. The proposed In-Context Representation Learning (ICRL) framework, tested on the molecular domain, is to our knowledge the first training-free framework of its kind. Published at NeurIPS 2025 (first author).
 \end{itemize}
 
-\entryhead{Shanghai Artificial Intelligence Laboratory}{}{Shanghai, China}
-\entrysub{Trainee Researcher.\, Focus: evaluation of large generative models.}{Oct.~2023 -- Oct.~2024}
+\row{Shanghai Artificial Intelligence Laboratory}{Shanghai, China}
+\subrow{Trainee Researcher.\, Focus: evaluation of large generative models.}{Oct.~2023 -- Oct.~2024}
 \begin{itemize}
-  \item Designed the T2VHE protocol, a standardized human-evaluation pipeline for text-to-video
-        models with well-defined metrics, annotator training, and a dynamic evaluation module;
-        reduces evaluation cost by $\sim$50\% while preserving annotation quality. Published at
-        NeurIPS 2024 (first author).
-  \item Co-built ConvBench, a hierarchical multi-turn benchmark for large vision-language models
-        that disentangles perception, reasoning, and creation. Published at NeurIPS 2024 Spotlight
-        (co-author).
+  \item Designed the T2VHE protocol, a standardized human-evaluation pipeline for text-to-video models that reduces evaluation cost by $\sim$50\% while preserving annotation quality. Published at NeurIPS 2024 (first author).
+  \item Co-built ConvBench, a hierarchical multi-turn benchmark for LVLMs that disentangles perception, reasoning, and creation. Published at NeurIPS 2024 Spotlight (co-author).
 \end{itemize}
 
-\entryhead{NUS High Performance Computing for AI (HPC-AI) Lab}{}{Singapore}
-\entrysub{Research Intern.\, Focus: graph dataset condensation.}{Apr.~2023 -- Oct.~2024}
+\row{NUS High Performance Computing for AI (HPC-AI) Lab}{Singapore}
+\subrow{Research Intern.\, Focus: graph dataset condensation.}{Apr.~2023 -- Oct.~2024}
 \begin{itemize}
-  \item Investigated lossless graph dataset condensation. Proposed expanding-window trajectory
-        matching with a curriculum-based supervision design that substantially closes the gap to
-        full-graph training on large-scale graphs. Published at ICML 2024 (co-first author).
+  \item Investigated lossless graph dataset condensation. Proposed expanding-window trajectory matching with a curriculum-based supervision design that substantially closes the gap to full-graph training. Published at ICML 2024 (co-first author).
 \end{itemize}
 
 % ---------- PUBLICATIONS ----------
 \section*{Publications}
+{\footnotesize \textbf{Bold} = author of this CV;\; \textbf{*} = equal contribution;\; \textbf{\dag} = corresponding author.}\par
+\vspace{2pt}
 
-\noindent{\small \textbf{Bold} = author of this CV; \textbf{*} = equal contribution; \textbf{\dag} = corresponding author.}
+\begin{itemize}[leftmargin=1.4em, itemsep=4pt]
 
-\publication{AAAI'26}
-  {To Align or Not to Align: Strategic Multimodal Representation Alignment for Optimal Performance}
-  {Wanlong Fang, \me{Tianle Zhang}, Alvin Chan\corr.}
-  {Proceedings of the 40th AAAI Conference on Artificial Intelligence, 2026.}
+  \item \textbf{(AAAI'26)}~To Align or Not to Align: Strategic Multimodal Representation Alignment for Optimal Performance.\par
+        Wanlong Fang, \me{Tianle Zhang}, Alvin Chan\corr.\par
+        \textit{Proceedings of the 40th AAAI Conference on Artificial Intelligence, 2026.}
 
-\publication{NeurIPS'25}
-  {Can LLMs Reason Over Non-Text Modalities in a Training-Free Manner? A Case Study with In-Context Representation Learning}
-  {\me{Tianle Zhang}\eq, Wanlong Fang\eq, Jonathan Woo\eq, Paridhi Latawa, Deepak A. Subramanian, Alvin Chan\corr.}
-  {Proceedings of the 39th Conference on Neural Information Processing Systems, 2025.}
+  \item \textbf{(NeurIPS'25)}~Can LLMs Reason Over Non-Text Modalities in a Training-Free Manner? A Case Study with In-Context Representation Learning.\par
+        \me{Tianle Zhang}\eq, Wanlong Fang\eq, Jonathan Woo\eq, Paridhi Latawa, Deepak A. Subramanian, Alvin Chan\corr.\par
+        \textit{Proceedings of the 39th Conference on Neural Information Processing Systems, 2025.}
 
-\publication{NeurIPS'24}
-  {Rethinking Human Evaluation Protocol for Text-to-Video Models: Enhancing Reliability, Reproducibility, and Practicality}
-  {\me{Tianle Zhang}, Langtian Ma, Yuchen Yan, Yuchen Zhang, Kai Wang, Yue Yang, Ziyao Guo, Wenqi Shao, Yang You, Yu Qiao, Ping Luo, Kaipeng Zhang\corr.}
-  {Proceedings of the 38th Conference on Neural Information Processing Systems, 2024.}
+  \item \textbf{(NeurIPS'24)}~Rethinking Human Evaluation Protocol for Text-to-Video Models: Enhancing Reliability, Reproducibility, and Practicality.\par
+        \me{Tianle Zhang}, Langtian Ma, Yuchen Yan, Yuchen Zhang, Kai Wang, Yue Yang, Ziyao Guo, Wenqi Shao, Yang You, Yu Qiao, Ping Luo, Kaipeng Zhang\corr.\par
+        \textit{Proceedings of the 38th Conference on Neural Information Processing Systems, 2024.}
 
-\publication{NeurIPS'24 Spotlight}
-  {ConvBench: A Multi-Turn Conversation Evaluation Benchmark with Hierarchical Capability for Large Vision-Language Models}
-  {Shuo Liu, Kaining Ying, Hao Zhang, Yue Yang, Yuqi Lin, \me{Tianle Zhang}, Chuanhao Li, Yu Qiao, Ping Luo, Wenqi Shao\corr, Kaipeng Zhang\corr.}
-  {Proceedings of the 38th Conference on Neural Information Processing Systems, 2024.}
+  \item \textbf{(NeurIPS'24 Spotlight)}~ConvBench: A Multi-Turn Conversation Evaluation Benchmark with Hierarchical Capability for Large Vision-Language Models.\par
+        Shuo Liu, Kaining Ying, Hao Zhang, Yue Yang, Yuqi Lin, \me{Tianle Zhang}, Chuanhao Li, Yu Qiao, Ping Luo, Wenqi Shao\corr, Kaipeng Zhang\corr.\par
+        \textit{Proceedings of the 38th Conference on Neural Information Processing Systems, 2024.}
 
-\publication{ICML'24}
-  {Navigating Complexity: Toward Lossless Graph Condensation via Expanding Window Matching}
-  {Yuchen Zhang\eq, \me{Tianle Zhang}\eq, Kai Wang, Ziyao Guo, Yuxuan Liang, Xavier Bresson, Wei Jin, Yang You.}
-  {Proceedings of the 41st International Conference on Machine Learning, 2024.}
+  \item \textbf{(ICML'24)}~Navigating Complexity: Toward Lossless Graph Condensation via Expanding Window Matching.\par
+        Yuchen Zhang\eq, \me{Tianle Zhang}\eq, Kai Wang, Ziyao Guo, Yuxuan Liang, Xavier Bresson, Wei Jin, Yang You.\par
+        \textit{Proceedings of the 41st International Conference on Machine Learning, 2024.}
 
-\publication{ICONIP'23}
-  {ADGCN: A Weakly Supervised Framework for Anomaly Detection in Social Networks}
-  {Zhixiang Shen\eq, \me{Tianle Zhang}\eq\corr, Haolan He\eq.}
-  {International Conference on Neural Information Processing, 2023 (CCF-C).}
+  \item \textbf{(ICONIP'23)}~ADGCN: A Weakly Supervised Framework for Anomaly Detection in Social Networks.\par
+        Zhixiang Shen\eq, \me{Tianle Zhang}\eq\corr, Haolan He\eq.\par
+        \textit{International Conference on Neural Information Processing, 2023 (CCF-C).}
 
-\publication{IEEE EHB'22}
-  {Phase Detection Methods for Alzheimer's Disease Based on Improved Convolutional Neural Network Fine-tuning}
-  {\me{Tianle Zhang}, Rui Yin, Zhan Qu, Zhuo Chen.}
-  {10th IEEE International Conference on e-Health and Bioengineering, 2022 (IEEE Xplore, SCOPUS, WoS).}
+  \item \textbf{(IEEE EHB'22)}~Phase Detection Methods for Alzheimer's Disease Based on Improved Convolutional Neural Network Fine-tuning.\par
+        \me{Tianle Zhang}, Rui Yin, Zhan Qu, Zhuo Chen.\par
+        \textit{10th IEEE International Conference on e-Health and Bioengineering, 2022 (IEEE Xplore, SCOPUS, WoS).}
 
-\publication{IEEE ITME'22}
-  {Fast Classification of Alzheimer's Disease Based on Improved Convolutional Neural Network}
-  {Zhan Qu, \me{Tianle Zhang}, Rui Yin, Zhuo Chen, Teoh Teik Toe.}
-  {IEEE International Conference on Information Technology in Medicine and Education, 2022 (IEEE Xplore).}
+  \item \textbf{(IEEE ITME'22)}~Fast Classification of Alzheimer's Disease Based on Improved Convolutional Neural Network.\par
+        Zhan Qu, \me{Tianle Zhang}, Rui Yin, Zhuo Chen, Teoh Teik Toe.\par
+        \textit{IEEE International Conference on Information Technology in Medicine and Education, 2022 (IEEE Xplore).}
+
+\end{itemize}
 
 % ---------- AWARDS ----------
 \section*{Awards and Scholarships}
 
-\begin{enumerate}[leftmargin=2em, itemsep=4pt]
-  \item \textbf{NTU Research Scholarship (R-RSS)} \hfill Sep.~2024 \\
-        \textit{Graduate College, Nanyang Technological University --- full tuition + monthly stipend, awarded for PhD studies.}
-  \item \textbf{Excellent First-class Scholarship} \hfill Oct.~2023 \\
-        \textit{University of Electronic Science and Technology of China.}
-  \item \textbf{Xiaomi Scholarship} \hfill Oct.~2023 \\
-        \textit{Xiaomi Foundation $\times$ UESTC.}
-  \item \textbf{Tencent First-class Scholarship} \hfill Oct.~2022 \\
-        \textit{Tencent Foundation $\times$ UESTC.}
-  \item \textbf{NTU Project Scholarship} \hfill Oct.~2022 \\
-        \textit{Nanyang Technological University (undergraduate research visit).}
-  \item \textbf{Bronze Award, Chengdu 80 Fintech Product R\&D Competition} \hfill Oct.~2021 \\
-        \textit{Chengdu Fintech Industry Innovation Center.}
-  \item \textbf{Special Prize, 7th UESTC ``Internet Plus'' Innovation \& Entrepreneurship Competition} \hfill Aug.~2021 \\
-        \textit{University of Electronic Science and Technology of China.}
-  \item \textbf{Second Prize (Sichuan Province), 11th National College Students E-commerce Competition} \hfill Aug.~2021 \\
-        \textit{National Ministry of Education.}
-  \item \textbf{Blockchain Financial Experiment Class Scholarship} \hfill Oct.~2020 \\
-        \textit{University of Electronic Science and Technology of China.}
+\begin{enumerate}[leftmargin=1.6em]
+  \item \textbf{NTU Research Scholarship (R-RSS)} --- \textit{Graduate College, NTU; full tuition + monthly stipend.} \hfill Sep.~2024
+  \item \textbf{Excellent First-class Scholarship} --- \textit{University of Electronic Science and Technology of China.} \hfill Oct.~2023
+  \item \textbf{Xiaomi Scholarship} --- \textit{Xiaomi Foundation $\times$ UESTC.} \hfill Oct.~2023
+  \item \textbf{Tencent First-class Scholarship} --- \textit{Tencent Foundation $\times$ UESTC.} \hfill Oct.~2022
+  \item \textbf{NTU Project Scholarship} --- \textit{Nanyang Technological University (undergraduate research visit).} \hfill Oct.~2022
+  \item \textbf{Bronze Award, Chengdu 80 Fintech Product R\&D Competition} --- \textit{Chengdu Fintech Industry Innovation Center.} \hfill Oct.~2021
+  \item \textbf{Special Prize, 7th UESTC ``Internet Plus'' Innovation \& Entrepreneurship Competition} --- \textit{UESTC.} \hfill Aug.~2021
+  \item \textbf{Second Prize (Sichuan), 11th National College E-commerce Competition} --- \textit{National Ministry of Education.} \hfill Aug.~2021
+  \item \textbf{Blockchain Financial Experiment Class Scholarship} --- \textit{UESTC.} \hfill Oct.~2020
 \end{enumerate}
 
 % ---------- ACADEMIC SERVICE ----------
 \section*{Academic Service}
 
-\textbf{Reviewer Recognition}
+\noindent\textbf{Reviewer Recognition}
 \begin{itemize}
   \item \textbf{ICML 2026 Gold Reviewer} --- awarded to top reviewers based on area-chair ratings of submitted reviews; includes complimentary conference registration.
 \end{itemize}
 
-\textbf{Conference Reviewer}
+\vspace{2pt}
+\noindent\textbf{Conference Reviewer}
 \begin{itemize}
   \item International Conference on Learning Representations (ICLR): 2026
   \item Conference on Neural Information Processing Systems (NeurIPS): 2025, 2026
@@ -242,7 +193,8 @@ GPA: 88.51/100\\
   \item ICLR 2025 Workshop on AI for Nucleic Acids (AI4NA)
 \end{itemize}
 
-\textbf{Workshop Committee}
+\vspace{2pt}
+\noindent\textbf{Workshop Committee}
 \begin{itemize}
   \item ECCV 2024 Workshop on Dataset Distillation Challenge --- Committee Member.
 \end{itemize}
@@ -250,9 +202,9 @@ GPA: 88.51/100\\
 % ---------- SKILLS ----------
 \section*{Skills and Languages}
 
-\textbf{Programming:} Python (primary), Solidity, C; experienced with DApp / smart-contract development.\\
-\textbf{ML / DL:} PyTorch, Hugging Face, scikit-learn; familiar with multi-modal LLMs, diffusion models, GNNs, and dataset distillation pipelines.\\
-\textbf{Tools:} Git, Linux, CUDA, LaTeX, Weights \& Biases.\\
+\noindent\textbf{Programming:} Python (primary), Solidity, C; experienced with DApp / smart-contract development.\par
+\textbf{ML / DL:} PyTorch, Hugging Face, scikit-learn; multi-modal LLMs, diffusion models, GNNs, dataset distillation.\par
+\textbf{Tools:} Git, Linux, CUDA, LaTeX, Weights \& Biases.\par
 \textbf{Languages:} Chinese (Native); English (Fluent --- academic writing, presentation, NeurIPS poster experience).
 
 \end{document}
