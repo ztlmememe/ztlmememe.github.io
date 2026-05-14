@@ -1,0 +1,35 @@
+name: Build CV
+
+on:
+  push:
+    paths:
+      - 'cv/cv.tex'
+      - '.github/workflows/build-cv.yml'
+  workflow_dispatch:  # allow manual trigger from the Actions tab
+
+permissions:
+  contents: write  # needed to commit the built PDF back
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX (XeLaTeX, full TeX Live for CJK fonts)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: cv.tex
+          working_directory: cv
+          latexmk_use_xelatex: true
+          # 'full' image ships Noto CJK fonts so xeCJK works out of the box
+          texlive_version: 2024
+
+      - name: Commit updated PDF
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "ci: rebuild cv.pdf"
+          file_pattern: 'cv/cv.pdf'
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
