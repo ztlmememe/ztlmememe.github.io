@@ -10,7 +10,8 @@
 % ---------- fonts (sans-serif body, close to Calibri feel) ----------
 \usepackage{fontspec}
 \setmainfont{TeX Gyre Heros}            % Helvetica-like sans
-\newfontfamily\cjkfont{Droid Sans Fallback}  % fallback for "张天乐" locally; GA will use Noto
+% CJK font for "张天乐": Noto on GitHub Actions (texlive full image); Droid on Windows.
+\IfFontExistsTF{Noto Sans CJK SC}{\newfontfamily\cjkfont{Noto Sans CJK SC}}{\newfontfamily\cjkfont{Droid Sans Fallback}}
 \linespread{1.05}
 
 % ---------- packages ----------
@@ -76,7 +77,7 @@ multi-turn benchmark for large vision-language models (NeurIPS 2024 Spotlight). 
 efficient learning includes expanding-window trajectory matching for lossless graph dataset
 condensation (ICML 2024, co-first author). Across 9 publications at top-tier ML venues (NeurIPS,
 ICML, AAAI) and IEEE conferences, I am first or co-first author on 5. I am supported by the NTU
-Research Scholarship, and serve as a reviewer for ICLR 2026, NeurIPS 2025/2026, and ICML 2025/2026.
+Research Scholarship, and serve as a reviewer for ICLR 2026/2027, NeurIPS 2025/2026, ICML 2025/2026, AAAI 2027, and TMLR.
 Further details on my \href{https://ztlmememe.github.io/}{homepage}.
 }
 
